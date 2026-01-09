@@ -88,23 +88,20 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 /* HERO IMAGE - ပုံသေးသေးလေး */
 .hero-img{
   margin: 0 auto;
-  width: 180px; /* ပုံကိုသေးသွားအောင် */
-  height: 180px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  border: 5px solid white;
-  position: relative;
+  width: 200px; /* ပုံအရွယ်အစား */
 }
 .hero-img img{
   width:100%;
-  height:100%;
-  object-fit: cover; /* ပုံကိုအဆင်ပြေအောင်fitလုပ်မယ် */
-  animation:float 3s ease-in-out infinite;
+  border-radius: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
+
+/* Scroll animation */
+.hero-img img.scroll-animate {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ================= PRODUCTS ================= */
@@ -421,7 +418,7 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 @media(min-width:768px){
   .nav-left a,.sign-btn{font-size:14px}
   .logo{font-size:20px}
-  .hero-img{width:200px; height:200px}
+  .hero-img{width:220px}
   .ges-header {font-size: 28px;}
 }
 </style>
@@ -453,7 +450,7 @@ header{position:sticky;top:0;z-index:999;padding:10px}
   <div class="hero-img">
     <!-- ww.jpg ပုံထည့်ထားတယ် -->
     <img src="ww.jpg" alt="Modern Seasonal Wear" 
-         onerror="this.onerror=null; this.src='https://i.imgur.com/5XKQb5N.png'">
+         id="mainImage">
   </div>
 </section>
 
@@ -567,6 +564,30 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 </div>
 
 <script>
+// Scroll animation for image
+window.addEventListener('scroll', function() {
+  const image = document.getElementById('mainImage');
+  const imagePosition = image.getBoundingClientRect().top;
+  const screenPosition = window.innerHeight / 1.3;
+  
+  if (imagePosition < screenPosition) {
+    image.classList.add('scroll-animate');
+  }
+});
+
+// Initial check on page load
+window.addEventListener('load', function() {
+  const image = document.getElementById('mainImage');
+  setTimeout(() => {
+    const imagePosition = image.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.3;
+    
+    if (imagePosition < screenPosition) {
+      image.classList.add('scroll-animate');
+    }
+  }, 100);
+});
+
 function showProducts(){
   document.getElementById('products').classList.add('show');
 }
@@ -774,15 +795,6 @@ document.addEventListener('click', function(event) {
       event.target !== exploreBtn && 
       !exploreBtn.contains(event.target)) {
     hideProducts();
-  }
-});
-
-// Check if ww.jpg loads, if not use fallback
-window.addEventListener('load', function() {
-  const heroImg = document.querySelector('.hero-img img');
-  if (heroImg.complete && heroImg.naturalHeight === 0) {
-    // Image failed to load
-    heroImg.src = 'https://i.imgur.com/5XKQb5N.png';
   }
 });
 </script>
