@@ -71,6 +71,7 @@ header{position:sticky;top:0;z-index:999;padding:10px}
   display:flex;
   justify-content:center;
   gap:14px;
+  margin-bottom: 20px;
 }
 .hero button{
   padding:12px 26px;
@@ -84,20 +85,28 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 .shop{background:#111;color:#fff}
 .explore{background:#fff}
 
-/* HERO IMAGE */
-.hero-img{
-  margin:25px auto 10px;
-  width:220px;
-}
-.hero-img img{
-  width:100%;
-  animation:float 3s ease-in-out infinite;
+/* HERO IMAGE - SMALLER SIZE */
+.hero-image{
+  margin: 20px auto 10px;
+  width: 180px; /* Smaller width */
+  height: 180px; /* Make it square */
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border: 5px solid white;
+  animation: float 3s ease-in-out infinite;
 }
+
+.hero-image img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display: block;
+}
+
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
+  50%{transform:translateY(-8px)} /* Reduced float height */
 }
 
 /* ================= PRODUCTS ================= */
@@ -482,7 +491,10 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 @media(min-width:768px){
   .nav-left a,.sign-btn{font-size:14px}
   .logo{font-size:20px}
-  .hero-img{width:260px}
+  .hero-image{
+    width: 200px; /* Slightly larger on desktop but still small */
+    height: 200px;
+  }
   .ges-header {font-size: 28px;}
 }
 </style>
@@ -511,9 +523,11 @@ header{position:sticky;top:0;z-index:999;padding:10px}
     <button class="explore" onclick="showProducts()">Explore All</button>
   </div>
 
-<div class="hero-image">
-  <img src="ww.jpg" alt="Ges Fashion">
-</div>
+  <!-- Your image from the provided link -->
+  <div class="hero-image">
+    <img src="https://founderbylin-ux.github.io/cloth/ww.png" alt="GES Fashion" 
+         onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:180px; height:180px; background:#fff; border-radius:20px; display:flex; align-items:center; justify-content:center; border:5px solid white; box-shadow:0 8px 25px rgba(0,0,0,0.15);\'><span style=\'font-size:24px; font-weight:700; color:#111;\'>GES</span></div>'">
+  </div>
 </section>
 
 <!-- PRODUCTS -->
@@ -902,15 +916,19 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// Check if image loads properly
+// Check if hero image loads properly
 window.addEventListener('load', function() {
-  const heroImg = document.querySelector('.hero-img img');
-  // If image doesn't load, show fallback text
+  const heroImg = document.querySelector('.hero-image img');
   if (heroImg) {
-    heroImg.onerror = function() {
-      this.style.display = 'none';
-      this.parentElement.innerHTML = '<div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;"><h2 style="color: #111; margin-bottom: 10px;">GES</h2><p style="color: #666;">Modern Fashion Collection</p></div>';
-    };
+    // Check if image loaded successfully
+    if (heroImg.complete && heroImg.naturalHeight !== 0) {
+      console.log('Hero image loaded successfully');
+    } else {
+      // If image failed to load, show fallback
+      heroImg.style.display = 'none';
+      const heroImageDiv = heroImg.parentElement;
+      heroImageDiv.innerHTML = '<div style="width:180px; height:180px; background:#fff; border-radius:20px; display:flex; align-items:center; justify-content:center; border:5px solid white; box-shadow:0 8px 25px rgba(0,0,0,0.15);"><span style="font-size:24px; font-weight:700; color:#111;">GES</span></div>';
+    }
   }
 });
 </script>
