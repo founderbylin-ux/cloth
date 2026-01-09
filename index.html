@@ -3,233 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GES eCommerce</title>
+<title>GES</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* Reset & Base */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{
+  background:linear-gradient(135deg,#f9957f,#f2f5d0);
   min-height:100vh;
-  background: linear-gradient(135deg, #f9957f, #f2f5d0);
-  color:#111;
   overflow-x:hidden;
 }
 
-/* Header */
-header{
-  display:flex; justify-content:space-between; align-items:center;
-  background:#fff; padding:12px 20px; height:60px; position:sticky; top:0; z-index:1000;
+/* ================= HEADER ================= */
+header{position:sticky;top:0;z-index:999;padding:10px}
+.nav-box{
+  background:#fff;
+  height:2.5cm;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  white-space:nowrap;
 }
-.logo{font-family:'Playfair Display', serif; font-size:22px; font-weight:700; color:#1f1f1f;}
-nav{display:flex; gap:12px; align-items:center;}
-nav .nav-left{display:flex; gap:12px;}
-nav a{color:#111; text-decoration:none; font-weight:500; font-size:14px; transition:0.2s;}
-nav a:hover{color:#0056b3;}
-.btn-sign{background:#007bff; color:#fff; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer; transition:0.25s; font-size:14px;}
-.btn-sign:hover{transform:scale(1.05);background:#0056b3;}
+.nav-left,.nav-right{display:flex;gap:12px}
+.nav-left a{
+  font-size:12px;
+  text-decoration:none;
+  color:#111;
+  font-weight:500;
+}
+.logo{font-size:16px;font-weight:700}
+.sign-btn{
+  background:#111;
+  color:#fff;
+  padding:6px 14px;
+  border-radius:6px;
+  font-size:12px;
+  text-decoration:none;
+}
 
-/* Hero */
+/* ================= HERO ================= */
 .hero{
-  padding:80px 20px 140px;
   text-align:center;
+  padding:40px 16px 10px;
+}
+.hero h1{font-size:32px;margin-bottom:10px}
+.hero p{font-size:15px;margin-bottom:20px}
+.hero .actions{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+}
+.hero button{
+  padding:12px 26px;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+.hero button:hover{transform:scale(1.08)}
+.shop{background:#111;color:#fff}
+.explore{background:#fff}
+
+/* HERO IMAGE */
+.hero-img{
+  margin:25px auto 10px;
+  width:220px;
+}
+.hero-img img{width:100%;animation:float 3s ease-in-out infinite}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+/* ================= PRODUCTS ================= */
+.products{
+  position:fixed;
+  bottom:-100%;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-radius:20px 20px 0 0;
+  padding:20px;
+  transition:.5s;
+}
+.products.show{bottom:0}
+.product-row{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+.product{
+  width:140px;
+  cursor:pointer;
+  transition:.25s;
+}
+.product:hover{transform:scale(1.06)}
+.product img{width:100%;border-radius:12px}
+.product p{text-align:center;margin-top:8px;font-weight:600}
+
+/* ================= MODALS ================= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+.modal.show{display:flex}
+.modal-box{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  width:85%;
+  max-width:360px;
   position:relative;
 }
-.hero h1{
-  font-family:'Playfair Display', serif; font-size:48px; margin-bottom:10px;
-}
-.hero p{font-size:18px; margin-bottom:20px;}
-.btn-primary, .btn-secondary{
-  padding:12px 30px; border-radius:8px; font-weight:700; cursor:pointer; transition:0.3s; font-size:16px;
-}
-.btn-primary{background:#007bff;color:#fff;border:none;}
-.btn-primary:hover{transform:scale(1.1);background:#0056b3;}
-.btn-secondary{background:#fff;color:#007bff;border:2px solid #007bff;}
-.btn-secondary:hover{transform:scale(1.1);background:#007bff;color:#fff;}
-.hero img{
-  max-width:320px; margin-top:30px; opacity:0; transform:translateY(50px);
-  transition:1s ease-out;
+.close{
+  position:absolute;
+  top:10px;
+  right:14px;
+  font-size:18px;
+  cursor:pointer;
 }
 
-/* Products Section */
-.products-container{
-  width:100%; overflow:hidden; display:flex; justify-content:center; margin-top:40px;
-}
-.products{
-  display:flex; gap:20px; padding:20px;
-  transform: translateX(100%);
-  transition: transform 1s ease;
-}
-.products.active{transform:translateX(0);}
-.product-card{
-  background:#fff; min-width:260px; border-radius:14px;
-  padding:16px; text-align:center; box-shadow:0 4px 18px rgba(0,0,0,0.1);
-  flex-shrink:0; cursor:pointer;
-}
-.product-card img{
-  width:100%; border-radius:12px; margin-bottom:16px;
-}
-.product-card h3{
-  font-family:'Playfair Display', serif; font-size:20px; margin-bottom:6px;
-}
-.product-card p{font-size:17px; color:#007bff; font-weight:600; font-family:'Poppins',sans-serif;}
+/* IMAGE MODAL */
+.img-modal img{width:100%;border-radius:14px}
 
-/* SignIn Popup inside white box */
-.popup-overlay{
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  display:none; justify-content:center; align-items:flex-start;
-  background:rgba(0,0,0,0.45); z-index:2000;
-}
-.popup{
-  background:#fff; padding:20px; border-radius:12px; width:300px; margin-top:70px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.25); position:relative;
-}
-.popup h2{font-size:22px;margin-bottom:12px;font-family:'Playfair Display', serif;}
-.popup .close{position:absolute; top:10px; right:10px; font-size:22px; cursor:pointer;}
-.popup .links{margin-bottom:10px;}
-.popup .links a{margin-right:10px; font-size:14px; color:#007bff; text-decoration:none;}
-.popup .links a:hover{color:#0056b3;}
-
-/* Lightbox */
-.lightbox{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.8); display:none; justify-content:center; align-items:center; z-index:3000;
-}
-.lightbox img{
-  max-width:80%; max-height:80%; border-radius:12px;
-  transition:0.3s;
-}
-.lightbox .close-lightbox{
-  position:absolute; top:20px; right:30px; font-size:30px; color:#fff; cursor:pointer;
-}
-
-/* Mobile Header Fix & Layout */
-@media (max-width:800px){
-  header{
-    flex-direction:column;
-    align-items:center;
-    padding:10px 20px;
-    height:auto;
-  }
-  nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    width:calc(100% - 2.5cm); /* White box width adjustment */
-    background:#fff;
-    padding:10px 16px;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-    margin-top:6px;
-  }
-  nav .nav-left{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-  }
-  nav a, .btn-sign{
-    font-size:12px;
-    padding:4px 8px;
-  }
-  .hero h1{font-size:36px;}
-  .products{flex-direction:column; transform:translateX(0);}
-  .popup{margin-top:60px;width:90%;}
+@media(min-width:768px){
+  .nav-left a,.sign-btn{font-size:14px}
+  .logo{font-size:20px}
+  .hero-img{width:260px}
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">GES</div>
-  <nav>
+  <div class="nav-box">
     <div class="nav-left">
       <a href="#">Telegram</a>
       <a href="#">Email</a>
       <a href="#">TikTok</a>
     </div>
-    <a class="btn-sign" id="signBtn">Sign In / Sign Up</a>
-  </nav>
+    <div class="logo">GES</div>
+    <div class="nav-right">
+      <a class="sign-btn" onclick="openSign()">Sign in / up</a>
+    </div>
+  </div>
 </header>
 
 <section class="hero">
-  <h1>Gear Up Every Season</h1>
-  <p>Discover premium products and accessories</p>
-  <button class="btn-primary" id="shopBtn">Shop Now</button>
-  <button class="btn-secondary" id="exploreBtn">Explore All</button>
-  <img src="images/hero.png" alt="Hero Person" id="heroImg">
+  <h1>Modern Seasonal Wear</h1>
+  <p>Designed for style lovers</p>
+  <div class="actions">
+    <button class="shop" onclick="openSign()">Shop Now</button>
+    <button class="explore" onclick="showProducts()">Explore All</button>
+  </div>
+
+  <div class="hero-img">
+    <img src="https://i.imgur.com/5XKQb5N.png">
+  </div>
 </section>
 
-<div class="products-container">
-  <div class="products" id="products">
-    <div class="product-card" data-large="images/product1.png">
-      <img src="images/product1.png" alt="">
-      <h3>Product 1</h3><p>$49.99</p>
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="product-row">
+    <div class="product" onclick="openImg(this)">
+      <img src="https://i.imgur.com/8Km9tLL.jpg">
+      <p>Product 1</p>
     </div>
-    <div class="product-card" data-large="images/product2.png">
-      <img src="images/product2.png" alt="">
-      <h3>Product 2</h3><p>$59.99</p>
+    <div class="product" onclick="openImg(this)">
+      <img src="https://i.imgur.com/QCNbOAo.jpg">
+      <p>Product 2</p>
     </div>
-    <div class="product-card" data-large="images/product3.png">
-      <img src="images/product3.png" alt="">
-      <h3>Product 3</h3><p>$69.99</p>
-    </div>
+  </div>
+</section>
+
+<!-- SIGN MODAL -->
+<div class="modal" id="signModal">
+  <div class="modal-box">
+    <span class="close" onclick="closeSign()">✕</span>
+    <h3>Sign in / Sign up</h3>
+    <p style="margin-top:10px">Continue to shop</p>
   </div>
 </div>
 
-<div class="popup-overlay" id="popup">
-  <div class="popup">
-    <span class="close" id="closePopup">&times;</span>
-    <h2>Sign In / Sign Up</h2>
-    <div class="links">
-      <a href="#">Telegram</a>
-      <a href="#">Email</a>
-      <a href="#">TikTok</a>
-    </div>
-    <input type="email" placeholder="Email" style="width:100%;padding:10px;margin:10px 0;border-radius:6px;border:1px solid #ccc;">
-    <input type="password" placeholder="Password" style="width:100%;padding:10px;margin-bottom:12px;border-radius:6px;border:1px solid #ccc;">
-    <button class="btn-primary" style="width:100%;padding:14px;">Submit</button>
+<!-- IMAGE MODAL -->
+<div class="modal img-modal" id="imgModal">
+  <div class="modal-box">
+    <span class="close" onclick="closeImg()">✕</span>
+    <img id="bigImg">
   </div>
-</div>
-
-<div class="lightbox" id="lightbox">
-  <span class="close-lightbox" id="closeLightbox">&times;</span>
-  <img src="" alt="Enlarged Product" id="lightboxImg">
 </div>
 
 <script>
-// Hero fade-in
-window.addEventListener('load', ()=>{
-  const heroImg = document.getElementById('heroImg');
-  heroImg.style.opacity = 1;
-  heroImg.style.transform = 'translateY(0)';
-});
-
-// Explore All -> slide-in products
-const exploreBtn = document.getElementById('exploreBtn');
-exploreBtn.addEventListener('click', ()=>{
-  const products = document.getElementById('products');
-  products.classList.add('active');
-});
-
-// Popup SignIn
-const popup = document.getElementById('popup');
-document.getElementById('signBtn').onclick = ()=> popup.style.display='flex';
-document.getElementById('closePopup').onclick = ()=> popup.style.display='none';
-document.getElementById('shopBtn').onclick = ()=> popup.style.display='flex';
-
-// Product click -> lightbox enlarge
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-document.querySelectorAll('.product-card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    lightboxImg.src = card.getAttribute('data-large');
-    lightbox.style.display = 'flex';
-  });
-});
-document.getElementById('closeLightbox').onclick = ()=> lightbox.style.display='none';
-lightbox.onclick = (e)=>{if(e.target===lightbox) lightbox.style.display='none';};
+function showProducts(){
+  document.getElementById('products').classList.add('show');
+}
+function openSign(){
+  document.getElementById('signModal').classList.add('show');
+}
+function closeSign(){
+  document.getElementById('signModal').classList.remove('show');
+}
+function openImg(el){
+  document.getElementById('bigImg').src = el.querySelector('img').src;
+  document.getElementById('imgModal').classList.add('show');
+}
+function closeImg(){
+  document.getElementById('imgModal').classList.remove('show');
+}
 </script>
 
 </body>
