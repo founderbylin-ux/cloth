@@ -4,44 +4,143 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GES</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:linear-gradient(135deg,#f9957f,#f2f5d0);min-height:100vh;overflow-x:hidden}
-/* HEADER */
+body{
+  background:linear-gradient(135deg,#f9957f,#f2f5d0);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
 header{position:sticky;top:0;z-index:999;padding:10px}
-.nav-box{background:#fff;height:2.5cm;border-radius:14px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 6px 18px rgba(0,0,0,.12);white-space:nowrap}
+.nav-box{
+  background:#fff;
+  height:2.5cm;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  white-space:nowrap;
+}
 .nav-left,.nav-right{display:flex;gap:12px}
-.nav-left a{font-size:12px;text-decoration:none;color:#111;font-weight:500}
+.nav-left a{
+  font-size:12px;
+  text-decoration:none;
+  color:#111;
+  font-weight:500;
+}
 .logo{font-size:16px;font-weight:700}
-.sign-btn{background:#111;color:#fff;padding:6px 14px;border-radius:6px;font-size:12px;text-decoration:none;cursor:pointer}
-/* HERO */
-.hero{text-align:center;padding:40px 16px 10px}
+.sign-btn{
+  background:#111;
+  color:#fff;
+  padding:6px 14px;
+  border-radius:6px;
+  font-size:12px;
+  text-decoration:none;
+}
+
+/* ================= HERO ================= */
+.hero{
+  text-align:center;
+  padding:40px 16px 10px;
+}
 .hero h1{font-size:32px;margin-bottom:10px}
 .hero p{font-size:15px;margin-bottom:20px}
-.hero .actions{display:flex;justify-content:center;gap:14px}
-.hero button{padding:12px 26px;border:none;border-radius:10px;font-weight:600;cursor:pointer;transition:.25s}
+.hero .actions{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+}
+.hero button{
+  padding:12px 26px;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
 .hero button:hover{transform:scale(1.08)}
 .shop{background:#111;color:#fff}
 .explore{background:#fff}
-.hero-img{margin:25px auto 10px;width:220px}
+
+/* HERO IMAGE */
+.hero-img{
+  margin:25px auto 10px;
+  width:220px;
+}
 .hero-img img{width:100%;animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-/* PRODUCTS */
-.products{position:fixed;bottom:-100%;left:0;width:100%;background:#fff;border-radius:20px 20px 0 0;padding:20px;transition:.5s}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+/* ================= PRODUCTS ================= */
+.products{
+  position:fixed;
+  bottom:-100%;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-radius:20px 20px 0 0;
+  padding:20px;
+  transition:.5s;
+}
 .products.show{bottom:0}
-.product-row{display:flex;justify-content:center;gap:20px;overflow-x:auto}
-.product{width:140px;cursor:pointer;transition:.25s}
+.product-row{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+.product{
+  width:140px;
+  cursor:pointer;
+  transition:.25s;
+}
 .product:hover{transform:scale(1.06)}
 .product img{width:100%;border-radius:12px}
 .product p{text-align:center;margin-top:8px;font-weight:600}
-/* MODALS */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000}
+
+/* ================= MODALS ================= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
 .modal.show{display:flex}
-.modal-box{background:#fff;padding:20px;border-radius:14px;width:85%;max-width:360px;position:relative}
-.close{position:absolute;top:10px;right:14px;font-size:18px;cursor:pointer}
+.modal-box{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  width:85%;
+  max-width:360px;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:14px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* IMAGE MODAL */
 .img-modal img{width:100%;border-radius:14px}
-@media(min-width:768px){.nav-left a,.sign-btn{font-size:14px}.logo{font-size:20px}.hero-img{width:260px}}
+
+@media(min-width:768px){
+  .nav-left a,.sign-btn{font-size:14px}
+  .logo{font-size:20px}
+  .hero-img{width:260px}
+}
 </style>
 </head>
 <body>
@@ -64,11 +163,12 @@ header{position:sticky;top:0;z-index:999;padding:10px}
   <h1>Modern Seasonal Wear</h1>
   <p>Designed for style lovers</p>
   <div class="actions">
-    <button class="shop" onclick="shopNow()">Shop Now</button>
+    <button class="shop" onclick="openSign()">Shop Now</button>
     <button class="explore" onclick="showProducts()">Explore All</button>
   </div>
+
   <div class="hero-img">
-    <img src="assets/hero.png">
+    <img src="https://i.imgur.com/5XKQb5N.png">
   </div>
 </section>
 
@@ -76,11 +176,11 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 <section class="products" id="products">
   <div class="product-row">
     <div class="product" onclick="openImg(this)">
-      <img src="assets/product1.png">
+      <img src="https://i.imgur.com/8Km9tLL.jpg">
       <p>Product 1</p>
     </div>
     <div class="product" onclick="openImg(this)">
-      <img src="assets/product2.png">
+      <img src="https://i.imgur.com/QCNbOAo.jpg">
       <p>Product 2</p>
     </div>
   </div>
@@ -92,10 +192,6 @@ header{position:sticky;top:0;z-index:999;padding:10px}
     <span class="close" onclick="closeSign()">✕</span>
     <h3>Sign in / Sign up</h3>
     <p style="margin-top:10px">Continue to shop</p>
-    <button onclick="googleLogin()">Sign in with Google</button>
-    <input type="email" id="emailInput" placeholder="Email">
-    <input type="password" id="passwordInput" placeholder="Password">
-    <button onclick="emailSignUp(document.getElementById('emailInput').value, document.getElementById('passwordInput').value)">Sign Up / Login</button>
   </div>
 </div>
 
@@ -107,69 +203,22 @@ header{position:sticky;top:0;z-index:999;padding:10px}
   </div>
 </div>
 
-<script type="module">
-// Firebase imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
-
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyB7IdVKr0f8hDj0ARHDR72s7mBMpWrSsMM",
-  authDomain: "ecommerce-4a3db.firebaseapp.com",
-  projectId: "ecommerce-4a3db"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// Google Login
-async function googleLogin(){
-  const provider = new GoogleAuthProvider();
-  try{
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    await setDoc(doc(db,"users",user.uid),{
-      email:user.email,
-      provider:"Google",
-      timestamp:serverTimestamp()
-    });
-    alert("Welcome "+user.displayName);
-    closeSign();
-  } catch(e){ console.error(e); alert("Login Failed"); }
+<script>
+function showProducts(){
+  document.getElementById('products').classList.add('show');
 }
-
-// Email signup/login
-async function emailSignUp(email, password){
-  try{
-    const result = await createUserWithEmailAndPassword(auth,email,password);
-    const user = result.user;
-    await setDoc(doc(db,"users",user.uid),{
-      email:user.email,
-      provider:"Email",
-      timestamp:serverTimestamp()
-    });
-    alert("Signup Successful!");
-    closeSign();
-  } catch(e){ console.error(e); alert("Signup Failed"); }
+function openSign(){
+  document.getElementById('signModal').classList.add('show');
 }
-
-// Modals
-function openSign(){document.getElementById('signModal').classList.add('show')}
-function closeSign(){document.getElementById('signModal').classList.remove('show')}
+function closeSign(){
+  document.getElementById('signModal').classList.remove('show');
+}
 function openImg(el){
   document.getElementById('bigImg').src = el.querySelector('img').src;
   document.getElementById('imgModal').classList.add('show');
 }
-function closeImg(){document.getElementById('imgModal').classList.remove('show')}
-
-// Products panel
-function showProducts(){document.getElementById('products').classList.add('show')}
-
-// Shop Now
-function shopNow(){
-  if(!auth.currentUser){ openSign(); }
-  else{ showProducts(); }
+function closeImg(){
+  document.getElementById('imgModal').classList.remove('show');
 }
 </script>
 
