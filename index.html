@@ -23,8 +23,9 @@ header{
   display:flex; justify-content:space-between; align-items:center;
   background:#fff; padding:12px 20px; height:60px; position:sticky; top:0; z-index:1000;
 }
-.logo{font-family:'Playfair Display', serif; font-size:28px; font-weight:700; color:#1f1f1f;}
-nav{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+.logo{font-family:'Playfair Display', serif; font-size:22px; font-weight:700; color:#1f1f1f;}
+nav{display:flex; gap:12px; align-items:center;}
+nav .nav-left{display:flex; gap:12px;}
 nav a{color:#111; text-decoration:none; font-weight:500; font-size:14px; transition:0.2s;}
 nav a:hover{color:#0056b3;}
 .btn-sign{background:#007bff; color:#fff; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer; transition:0.25s; font-size:14px;}
@@ -104,27 +105,33 @@ nav a:hover{color:#0056b3;}
   position:absolute; top:20px; right:30px; font-size:30px; color:#fff; cursor:pointer;
 }
 
-/* Mobile Header Fix: Telegram / Email / TikTok / Sign In inside white box */
+/* Mobile Header Fix & Layout */
 @media (max-width:800px){
   header{
     flex-direction:column;
     align-items:center;
     padding:10px 20px;
-    height:auto; /* Auto height for wrapping content */
+    height:auto;
   }
   nav{
-    flex-direction:row; /* Keep links in one row if possible */
-    flex-wrap:wrap;
-    justify-content:center;
-    background:#fff; /* White box */
-    padding:8px 12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:calc(100% - 2.5cm); /* White box width adjustment */
+    background:#fff;
+    padding:10px 16px;
     border-radius:12px;
-    width:100%;
     box-shadow:0 4px 12px rgba(0,0,0,0.1);
     margin-top:6px;
   }
+  nav .nav-left{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
   nav a, .btn-sign{
-    margin:6px 8px; /* Spacing inside white box */
+    font-size:12px;
+    padding:4px 8px;
   }
   .hero h1{font-size:36px;}
   .products{flex-direction:column; transform:translateX(0);}
@@ -137,9 +144,11 @@ nav a:hover{color:#0056b3;}
 <header>
   <div class="logo">GES</div>
   <nav>
-    <a href="#">Telegram</a>
-    <a href="#">Email</a>
-    <a href="#">TikTok</a>
+    <div class="nav-left">
+      <a href="#">Telegram</a>
+      <a href="#">Email</a>
+      <a href="#">TikTok</a>
+    </div>
     <a class="btn-sign" id="signBtn">Sign In / Sign Up</a>
   </nav>
 </header>
@@ -197,14 +206,14 @@ window.addEventListener('load', ()=>{
   heroImg.style.transform = 'translateY(0)';
 });
 
-// Explore All -> slide-in products (mobile & PC)
+// Explore All -> slide-in products
 const exploreBtn = document.getElementById('exploreBtn');
 exploreBtn.addEventListener('click', ()=>{
   const products = document.getElementById('products');
   products.classList.add('active');
 });
 
-// Popup SignIn inside header box
+// Popup SignIn
 const popup = document.getElementById('popup');
 document.getElementById('signBtn').onclick = ()=> popup.style.display='flex';
 document.getElementById('closePopup').onclick = ()=> popup.style.display='none';
