@@ -85,14 +85,24 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 .shop{background:#111;color:#fff}
 .explore{background:#fff}
 
-/* HERO IMAGE - ပုံသေးသေးလေး */
-.hero-img{
-  margin: 0 auto;
-  width: 500px; /* ပုံအရွယ်အစား */
+/* HERO IMAGE - အလယ်ခါးလောက်မှာထားမယ် */
+.hero-img-container {
+  margin: 40px auto 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-.hero-img img{
-  width:100%;
+
+.hero-img {
+  margin: 0 auto;
+  width: 400px; /* သင့်linkထဲကလိုမျိုး အလယ်ခါးလောက်မှာထားမယ် */
+  max-width: 90%;
+}
+
+.hero-img img {
+  width: 100%;
   border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -418,8 +428,12 @@ header{position:sticky;top:0;z-index:999;padding:10px}
 @media(min-width:768px){
   .nav-left a,.sign-btn{font-size:14px}
   .logo{font-size:20px}
-  .hero-img{width:220px}
+  .hero-img{width:450px}
   .ges-header {font-size: 28px;}
+}
+
+@media(max-width:480px){
+  .hero-img{width:300px}
 }
 </style>
 </head>
@@ -447,10 +461,12 @@ header{position:sticky;top:0;z-index:999;padding:10px}
     <button class="explore" onclick="showProducts()">Explore All</button>
   </div>
 
-  <div class="hero-img">
-    <!-- ww.jpg ပုံထည့်ထားတယ် -->
-    <img src="ww.jpg" alt="Modern Seasonal Wear" 
-         id="mainImage">
+  <div class="hero-img-container">
+    <div class="hero-img">
+      <!-- ww.jpg ပုံထည့်ထားတယ် -->
+      <img src="ww.jpg" alt="Modern Seasonal Wear" 
+           id="mainImage">
+    </div>
   </div>
 </section>
 
@@ -584,6 +600,11 @@ window.addEventListener('load', function() {
     
     if (imagePosition < screenPosition) {
       image.classList.add('scroll-animate');
+    } else {
+      // If image is visible on page load, animate it
+      setTimeout(() => {
+        image.classList.add('scroll-animate');
+      }, 300);
     }
   }, 100);
 });
